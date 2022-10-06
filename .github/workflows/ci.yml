@@ -19,11 +19,69 @@ jobs:
       - name: Get base branch name
         id: get-base-branch-name
         run: |
-            if [[ "${{github.event.pull_request.base.ref}}" != "" ]]; then
-              echo "::set-output name=branch::${{github.event.pull_request.base.ref}}"
-            else
-              echo "::set-output name=branch::main"
-            fi
+          if [[ "${{github.event.pull_request.base.ref}}" != "" ]]; then
+            echo "::set-output name=branch::${{github.event.pull_request.base.ref}}"
+          else
+            echo "::set-output name=branch::main"
+          fi
     outputs:
       base-branch-name: ${{ steps.get-base-branch-name.outputs.branch }}
       branch-name: ${{ steps.branch-name.outputs.current_branch }}
+  get-affected:
+    needs: [branch-info]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: ${{needs.branch-info.outputs.base-branch-name}}
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - name: Install dependencies
+        run: npm ci
+      - name: Get affected
+        id: get-projects-arrays
+        run: |
+          if [[ "${{github.event.pull_request.base.ref}}" == "" && "${{needs.branch-info.outputs.branch-name}}" == "main" ]]; then
+            echo "::set-output name=test-unit::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+          else
+            echo "::set-output name=test-unit::$(nx print-affected --target=test --base=origin/${{needs.branch-info.outputs.base-branch-name}}) --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+          fi
+    outputs:
+      test-unit: ${{ steps.get-projects-arrays.outputs.test-unit }}
+  unit-test:
+    runs-on: ubuntu-latest
+    needs: [get-affected]
+    if:  ${{ fromJson(needs.get-affected.outputs.test-unit)[0] }}
+    strategy:
+      max-parallel: 4
+      matrix:
+        node: ["18.x", "16.x"]
+        projectName: ${{fromJson(needs.get-affected.outputs.test-unit)}}
+    env:
+      NODE: ${{ matrix.node }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install dependencies
+        run: npm ci
+      - name: Test unit
+        run: nx test:unit ${{ matrix.projectName }}
+  build-finished:
+    runs-on: ubuntu-latest
+    needs: [unit-test]
+    if: |
+      always() &&
+      (needs.unit-test.result == 'success' || needs.unit-test.result == 'skipped')
+    steps:
+      - name: Trace
+        run: echo "All jobs finished"
