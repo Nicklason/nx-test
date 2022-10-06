@@ -56,8 +56,8 @@ jobs:
     steps:
       - name: test
         run: |
-          echo ${{ fromJson(needs.get-affected.outputs.unit-test) }}
-          echo ${{ fromJson(needs.get-affected.outputs.unit-test)[0] }}
+          echo "${{ fromJson(needs.get-affected.outputs.unit-test) }}"
+          echo "${{ fromJson(needs.get-affected.outputs.unit-test)[0] }}"
   unit-test:
     runs-on: ubuntu-latest
     needs: [get-affected]
