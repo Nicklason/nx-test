@@ -54,9 +54,9 @@ jobs:
       - name: Get affected
         id: get-projects-arrays
         run: |
-          echo "::set-output name=unit-test::$(npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+          echo "::set-output name=unit-test::$(npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")'
       - name: print affected
-        run: npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g'
+        run: npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")'
     outputs:
       unit-test: ${{ steps.get-projects-arrays.outputs.unit-test }}
   thingy:
