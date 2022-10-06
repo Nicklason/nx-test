@@ -50,7 +50,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit
       - name: Get affected
         id: get-projects-arrays
         run: |
@@ -92,7 +92,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
       - name: Install dependencies
-        run: npm ci
+        run: npm ci --no-audit
       - name: Test unit
         run: npx nx test ${{ matrix.projectName }}
   build-finished:
