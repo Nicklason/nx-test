@@ -13,7 +13,8 @@
         "outputPath": "dist/apps/todos",
         "main": "apps/todos/src/main.ts",
         "tsConfig": "apps/todos/tsconfig.app.json",
-        "assets": ["apps/todos/src/assets"]
+        "assets": ["apps/todos/src/assets"],
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
