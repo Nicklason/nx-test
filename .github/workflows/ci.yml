@@ -48,6 +48,8 @@ jobs:
         id: get-projects-arrays
         run: |
           echo "::set-output name=unit-test::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+      - name: print affected
+        run: nx print-affected --target=test --select=tasks.target.project
     outputs:
       unit-test: ${{ steps.get-projects-arrays.outputs.unit-test }}
   thingy:
