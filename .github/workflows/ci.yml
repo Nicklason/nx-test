@@ -47,9 +47,9 @@ jobs:
       - name: Get affected
         id: get-projects-arrays
         run: |
-          echo "::set-output name=unit-test::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+          echo "::set-output name=unit-test::$(npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
       - name: print affected
-        run: nx print-affected --target=test --select=tasks.target.project
+        run: npx nx print-affected --target=test --select=tasks.target.project
     outputs:
       unit-test: ${{ steps.get-projects-arrays.outputs.unit-test }}
   thingy:
@@ -80,7 +80,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test unit
-        run: nx test ${{ matrix.projectName }}
+        run: npx nx test ${{ matrix.projectName }}
   build-finished:
     runs-on: ubuntu-latest
     needs: [unit-test]
