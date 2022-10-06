@@ -47,13 +47,17 @@ jobs:
       - name: Get affected
         id: get-projects-arrays
         run: |
-          if [[ "${{github.event.pull_request.base.ref}}" == "" && "${{needs.branch-info.outputs.branch-name}}" == "main" ]]; then
-            echo "::set-output name=unit-test::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
-          else
-            echo "::set-output name=unit-test::$(nx print-affected --target=test --base=origin/${{needs.branch-info.outputs.base-branch-name}}) --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
-          fi
+          echo "::set-output name=unit-test::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
     outputs:
       unit-test: ${{ steps.get-projects-arrays.outputs.unit-test }}
+  thingy:
+    runs-on: ubuntu-latest
+    needs: [get-affected]
+    steps:
+      - name: test
+        run: |
+          echo $(fromJson(needs.get-affected.outputs.unit-test))
+          echo $(fromJson(needs.get-affected.outputs.unit-test)[0])
   unit-test:
     runs-on: ubuntu-latest
     needs: [get-affected]
