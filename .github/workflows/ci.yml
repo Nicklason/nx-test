@@ -48,21 +48,21 @@ jobs:
         id: get-projects-arrays
         run: |
           if [[ "${{github.event.pull_request.base.ref}}" == "" && "${{needs.branch-info.outputs.branch-name}}" == "main" ]]; then
-            echo "::set-output name=test-unit::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+            echo "::set-output name=unit-test::$(nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
           else
-            echo "::set-output name=test-unit::$(nx print-affected --target=test --base=origin/${{needs.branch-info.outputs.base-branch-name}}) --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
+            echo "::set-output name=unit-test::$(nx print-affected --target=test --base=origin/${{needs.branch-info.outputs.base-branch-name}}) --select=tasks.target.project | sed 's/ //g' | jq -c 'split(",")')"
           fi
     outputs:
-      test-unit: ${{ steps.get-projects-arrays.outputs.test-unit }}
+      unit-test: ${{ steps.get-projects-arrays.outputs.unit-test }}
   unit-test:
     runs-on: ubuntu-latest
     needs: [get-affected]
-    if:  ${{ fromJson(needs.get-affected.outputs.test-unit)[0] }}
+    if:  ${{ fromJson(needs.get-affected.outputs.unit-test)[0] }}
     strategy:
       max-parallel: 4
       matrix:
         node: ["18.x", "16.x"]
-        projectName: ${{fromJson(needs.get-affected.outputs.test-unit)}}
+        projectName: ${{fromJson(needs.get-affected.outputs.unit-test)}}
     env:
       NODE: ${{ matrix.node }}
     steps:
@@ -75,7 +75,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Test unit
-        run: nx test:unit ${{ matrix.projectName }}
+        run: nx test ${{ matrix.projectName }}
   build-finished:
     runs-on: ubuntu-latest
     needs: [unit-test]
