@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+jobs:
+  branch-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get branch name
+        id: branch-name
+        uses: tj-actions/branch-names@v5.2
+      - name: Get base branch name
+        id: get-base-branch-name
+        run: |
+            if [[ "${{github.event.pull_request.base.ref}}" != "" ]]; then
+              echo "::set-output name=branch::${{github.event.pull_request.base.ref}}"
+            else
+              echo "::set-output name=branch::main"
+            fi
+    outputs:
+      base-branch-name: ${{ steps.get-base-branch-name.outputs.branch }}
+      branch-name: ${{ steps.branch-name.outputs.current_branch }}
