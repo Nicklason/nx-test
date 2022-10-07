@@ -56,7 +56,7 @@
         "passWithNoTests": true
       }
     },
-    "docker": {
+    "release": {
       "executor": "@nx-tools/nx-docker:build",
       "options": {
         "push": true,
