@@ -44,7 +44,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        node: ["18.x", "16.x"]
+        node: ["18.x"]
         projectName: ${{fromJson(needs.affected.outputs.unit-test)}}
     env:
       NODE: ${{ matrix.node }}
