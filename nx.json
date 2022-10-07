@@ -28,7 +28,7 @@
     }
   },
   "targetDependencies": {
-    "docker": [
+    "release": [
       {
         "target": "build",
         "projects": "self"
