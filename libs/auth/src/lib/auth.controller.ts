@@ -17,7 +17,8 @@ export class AuthController {
     return {
       authenticated: true,
       stuff: true,
-      stuff2: true
+      stuff2: true,
+      stuff3: true
     }
   }
 }
