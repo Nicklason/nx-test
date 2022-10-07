@@ -18,7 +18,8 @@ export class AuthController {
       authenticated: true,
       stuff: true,
       stuff2: true,
-      stuff3: true
+      stuff3: true,
+      stuff4: true
     }
   }
 }
