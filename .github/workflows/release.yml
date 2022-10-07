@@ -70,12 +70,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   push_to_registry:
     runs-on: ubuntu-latest
-    needs: [release]
+    needs: [affected, release]
     if: needs.release.outputs.new_release_published == 'true'
     strategy:
       max-parallel: 4
       matrix:
-        projectName: ${{fromJson(steps.affected.outputs.release)}}
+        projectName: ${{fromJson(needs.affected.outputs.release)}}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
