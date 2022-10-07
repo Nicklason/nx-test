@@ -24,6 +24,9 @@ jobs:
           else
             echo "::set-output name=branch::main"
           fi
+      - name: Print branch name
+        run: |
+          echo "Branch name: ${{ steps.get-base-branch-name.outputs.branch }}"
     outputs:
       base-branch-name: ${{ steps.get-base-branch-name.outputs.branch }}
       branch-name: ${{ steps.branch-name.outputs.current_branch }}
@@ -55,17 +58,8 @@ jobs:
         id: get-projects-arrays
         run: |
           echo "::set-output name=unit-test::$(npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")')"
-      - name: print affected
-        run: npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")'
     outputs:
       unit-test: ${{ steps.get-projects-arrays.outputs.unit-test }}
-  thingy:
-    runs-on: ubuntu-latest
-    needs: [get-affected]
-    steps:
-      - name: test
-        run: |
-          echo "${{ needs.get-affected.outputs.unit-test }}"
   unit-test:
     runs-on: ubuntu-latest
     needs: [get-affected]
