@@ -22,7 +22,18 @@
     },
     "lint": {
       "inputs": ["default", "{workspaceRoot}/.eslintrc.json"]
+    },
+    "docker": {
+      "dependsOn": ["build"]
     }
+  },
+  "targetDependencies": {
+    "docker": [
+      {
+        "target": "build",
+        "projects": "self"
+      }
+    ]
   },
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],

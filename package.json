@@ -27,6 +27,7 @@
     "@nrwl/nest": "14.8.3",
     "@nrwl/node": "14.8.3",
     "@nrwl/workspace": "14.8.3",
+    "@nx-tools/nx-docker": "^3.0.4",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/github": "^8.0.6",
     "@semantic-release/release-notes-generator": "^10.0.3",
