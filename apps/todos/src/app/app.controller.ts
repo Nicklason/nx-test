@@ -7,7 +7,7 @@ import { TodoService } from './todo/todo.service';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private todosService: TodoService
+    private todosService: TodoService,
   ) {}
 
   @Get('api')

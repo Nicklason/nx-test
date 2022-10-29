@@ -18,7 +18,15 @@ describe('AppController', () => {
   describe('getData', () => {
     it('should return "Welcome to todos!"', () => {
       const appController = app.get<AppController>(AppController);
-      expect(appController.getData()).toEqual([{"done": false, "message": "Take out trash"}, {"done": false, "message": "Continue using Nx"}, { message: 'Testing Nx before using it in production', done: false, doing: true }]);
+      expect(appController.getData()).toEqual([
+        { done: false, message: 'Take out trash' },
+        { done: false, message: 'Continue using Nx' },
+        {
+          message: 'Testing Nx before using it in production',
+          done: false,
+          doing: true,
+        },
+      ]);
     });
   });
 });
