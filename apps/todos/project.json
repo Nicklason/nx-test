@@ -60,19 +60,8 @@
       "executor": "@nx-tools/nx-docker:build",
       "options": {
         "push": true,
-        "metadata": {
-          "images": ["ghcr.io/nicklason/nx-test/todos"],
-          "tags": [
-            "type=schedule",
-            "type=ref,event=branch",
-            "type=ref,event=tag",
-            "type=ref,event=pr",
-            "type=semver,pattern={{version}}",
-            "type=semver,pattern={{major}}.{{minor}}",
-            "type=semver,pattern={{major}}",
-            "type=sha,prefix=sha-"
-          ]
-        }
+        "cache-from": ["type=local,src=/tmp/.buildx-cache"],
+        "cache-to": ["type=local,dest=/tmp/.buildx-cache-new,mode=max"]
       }
     }
   },
