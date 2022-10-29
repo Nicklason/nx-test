@@ -35,9 +35,9 @@ jobs:
       - name: Get affected
         id: affected
         run: |
-          echo "::set-output name=release::$(npx nx print-affected --target=release --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")')"
+          echo "RELEASE=$(npx nx print-affected --target=release --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")')" >> $GITHUB_OUTPUT
     outputs:
-      release: ${{ steps.affected.outputs.release }}
+      release: ${{ steps.affected.outputs.RELEASE }}
   release:
     runs-on: ubuntu-latest
     needs: [affected]

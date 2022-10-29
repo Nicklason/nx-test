@@ -34,9 +34,9 @@ jobs:
       - name: Get affected
         id: affected
         run: |
-          echo "::set-output name=unit-test::$(npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")')"
+          echo "UNIT_TEST=$(npx nx print-affected --target=test --select=tasks.target.project | sed 's/ //g' | sed 's|$|"|' | sed -e 's/^/"/' | jq -c 'split(",")')" >> $GITHUB_OUTPUT
     outputs:
-      unit-test: ${{ steps.affected.outputs.unit-test }}
+      unit-test: ${{ steps.affected.outputs.UNIT_TEST }}
   unit-test:
     runs-on: ubuntu-latest
     needs: [affected]
