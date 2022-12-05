@@ -1,7 +1,7 @@
 version: 2
 updates:
 - directory: /
-  open-pull-requests-limit: 1
+  open-pull-requests-limit: 10
   package-ecosystem: npm
   rebase-strategy: auto
   schedule:
@@ -18,3 +18,8 @@ updates:
   commit-message:
     prefix: chore
     include: scope
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
