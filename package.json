@@ -32,7 +32,7 @@
     "@nrwl/nest": "15.2.4",
     "@nrwl/node": "15.2.4",
     "@nrwl/workspace": "15.2.4",
-    "@nx-tools/nx-docker": "^3.0.4",
+    "@nx-tools/nx-container": "^4.0.1",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/github": "^8.0.6",
@@ -45,7 +45,7 @@
     "commitizen": "^4.2.5",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "~8.15.0",
-    "eslint-config-prettier": "8.1.0",
+    "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
     "husky": "^8.0.1",
     "is-ci": "^3.0.1",
@@ -64,4 +64,3 @@
     }
   }
 }
-

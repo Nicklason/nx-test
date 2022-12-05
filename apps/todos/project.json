@@ -57,7 +57,7 @@
       }
     },
     "release": {
-      "executor": "@nx-tools/nx-docker:build",
+      "executor": "@nx-tools/nx-container:build",
       "options": {
         "push": true,
         "cache-from": ["type=local,src=/tmp/.buildx-cache"],
