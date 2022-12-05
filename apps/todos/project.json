@@ -50,7 +50,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/todos"],
+      "outputs": ["{workspaceRoot}/coverage/apps/todos"],
       "options": {
         "jestConfig": "apps/todos/jest.config.ts",
         "passWithNoTests": true
