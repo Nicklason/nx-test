@@ -31,7 +31,7 @@
     "@nrwl/linter": "15.2.4",
     "@nrwl/nest": "15.2.4",
     "@nrwl/node": "15.2.4",
-    "@nrwl/workspace": "15.2.4",
+    "@nrwl/workspace": "15.4.1",
     "@nx-tools/nx-container": "^4.0.2",
     "@semantic-release/commit-analyzer": "^9.0.2",
     "@semantic-release/git": "^10.0.1",
