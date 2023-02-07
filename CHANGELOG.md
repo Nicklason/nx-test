@@ -1,3 +1,10 @@
+# [1.12.0](https://github.com/Nicklason/nx-test/compare/v1.11.0...v1.12.0) (2023-02-07)
+
+
+### Features
+
+* add stuff ([6fc0c40](https://github.com/Nicklason/nx-test/commit/6fc0c40bf5d13ba75e6c0efa9de3d3a9b9b2fecc))
+
 # [1.11.0](https://github.com/Nicklason/nx-test/compare/v1.10.0...v1.11.0) (2022-12-06)
 
 
