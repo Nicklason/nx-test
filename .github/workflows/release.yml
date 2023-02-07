@@ -1,16 +1,14 @@
 name: Release
 
 on:
-  workflow_run:
-    workflows: ['CI']
-    branches: [main]
-    types:
-      - completed
+  push:
+    branches:
+      - main
+      - next
 
 jobs:
   affected:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
         with:
