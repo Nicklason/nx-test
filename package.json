@@ -1,6 +1,6 @@
 {
   "name": "myorg",
-  "version": "1.12.0-dev.1",
+  "version": "0.0.0-dev",
   "license": "MIT",
   "scripts": {
     "prepare": "is-ci || husky install",
