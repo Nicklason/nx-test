@@ -31,6 +31,13 @@ export class AuthController {
       stuff13: true,
       stuff14: true,
       stuff15: true,
+      stuff16: true,
+      stuff17: true,
+      stuff18: true,
+      stuff19: true,
+      stuff20: true,
+      stuff21: true,
+      stuff22: true,
     };
   }
 }
