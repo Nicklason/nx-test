@@ -12,5 +12,11 @@ module.exports = {
     ],
     '@semantic-release/git',
   ],
-  branches: ['main'],
+  branches: [
+    'main',
+    {
+      name: 'dev',
+      prerelease: true,
+    },
+  ],
 };
