@@ -1,3 +1,12 @@
+# [1.12.0-dev.1](https://github.com/Nicklason/nx-test/compare/v1.11.0...v1.12.0-dev.1) (2023-02-11)
+
+
+### Features
+
+* add more stuff ([d66e14b](https://github.com/Nicklason/nx-test/commit/d66e14b4b33d3755e56dd8e7e4c72215d4b13ae0))
+* add stuff ([6fc0c40](https://github.com/Nicklason/nx-test/commit/6fc0c40bf5d13ba75e6c0efa9de3d3a9b9b2fecc))
+* add stuffs ([217baa9](https://github.com/Nicklason/nx-test/commit/217baa9f0e0b6b68dde833e297fe8ec33375d855))
+
 # [1.11.0](https://github.com/Nicklason/nx-test/compare/v1.10.0...v1.11.0) (2022-12-06)
 
 
