@@ -105,8 +105,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - name: Use Node.js
         uses: actions/setup-node@v3
         with:
@@ -123,6 +123,5 @@ jobs:
       - name: Build and push
         run: npx nx release ${{ matrix.projectName }}
         env:
-          INPUT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_TAGS: ${{ steps.meta.outputs.tags }}
           INPUT_LABELS: ${{ steps.meta.outputs.labels }}
