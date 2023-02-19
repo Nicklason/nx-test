@@ -18,6 +18,42 @@
         "jestConfig": "libs/auth/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/auth",
+        "tsConfig": "libs/auth/tsconfig.lib.json",
+        "packageJson": "libs/auth/package.json",
+        "main": "libs/auth/src/index.ts",
+        "assets": ["libs/auth/*.md"]
+      }
+    },
+    "npm": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "if [ \"{args.version}\" = \"undefined\" ]; then exit 1; fi",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "jq '.version=\"{args.version}\"' package.json > package.json.tmp",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "mv package.json.tmp package.json",
+            "forwardAllArgs": false
+          },
+          {
+            "command": "npm publish",
+            "forwardAllArgs": false
+          }
+        ],
+        "cwd": "dist/libs/auth/",
+        "parallel": false
+      }
     }
   },
   "tags": []

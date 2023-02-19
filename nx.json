@@ -25,6 +25,9 @@
     },
     "docker": {
       "dependsOn": ["build"]
+    },
+    "npm": {
+      "dependsOn": ["build"]
     }
   },
   "targetDependencies": {
