@@ -147,6 +147,6 @@ jobs:
       - name: Install dependencies
         run: npm ci --no-audit
       - name: Build and publish
-        run: npx nx run ${{ matrix.projectName }}:npm --args="--version=${{ needs.release.outputs.new_release_version }} --tag=${{ needs.release.outputs.new_release_channel }}"
+        run: npx nx run ${{ matrix.projectName }}:npm --args="--version=${{ needs.release.outputs.new_release_version }} --tag=\"${{ needs.release.outputs.new_release_channel\" }}"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
