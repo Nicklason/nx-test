@@ -47,11 +47,7 @@
             "forwardAllArgs": false
           },
           {
-            "command": "echo \"tag: {args.tag}\"",
-            "forwardAllArgs": false
-          },
-          {
-            "command": "[[ \"{args.tag}\" = \"undefined\" ]] && npm publish || npm publish --tag {args.tag}",
+            "command": "npm publish --tag {args.tag}",
             "forwardAllArgs": false
           }
         ],
