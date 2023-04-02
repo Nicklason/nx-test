@@ -16,6 +16,7 @@ export class AuthController {
     console.log(username, password);
     return {
       authenticated: true,
+      authenticated2: true,
       stuff: true,
       stuff2: true,
       stuff3: true,
