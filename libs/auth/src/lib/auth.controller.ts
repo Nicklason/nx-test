@@ -16,6 +16,7 @@ export class AuthController {
     console.log(username, password);
     return {
       authenticated: true,
+      authenticated2: true,
       stuff: true,
       stuff2: true,
       stuff3: true,
@@ -42,6 +43,7 @@ export class AuthController {
       stuff24: true,
       stuff25: true,
       stuff26: 27,
+      stuff27: true,
     };
   }
 }
